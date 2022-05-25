@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 Restaurant.destroy_all
+Review.destroy_all
 
 5.times do
   restaurant = Restaurant.new({
@@ -17,3 +18,14 @@ Restaurant.destroy_all
   )
   restaurant.save!
 end
+
+50.times do
+  review = Review.new({
+    rating: (0..5).to_a.sample,
+    content: Faker::Commerce.department,
+    restaurant_id: Restaurant.all.sample.id
+  })
+  review.save!
+end
+
+puts Review.all
